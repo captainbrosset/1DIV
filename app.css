@@ -2,7 +2,7 @@
   --theme-color: #ffffff;
   --contrast-color: #282a39;
   --padding: 12px;
-  --toolbar-height: 40px;
+  --toolbar-height: calc(40px + 2 * var(--padding));
 }
 
 html,
@@ -45,6 +45,8 @@ footer {
   left: 0;
   right: 0;
   height: var(--toolbar-height);
+  padding: var(--padding);
+  box-sizing: border-box;
 }
 
 header {
@@ -52,20 +54,15 @@ header {
   display: flex;
   gap: var(--padding);
   justify-content: space-between;
-  padding: var(--padding) 0;
-  /* With WCO, then width wins and our header is exactly the size of the title bar. */
-  /* Without WCO, then width is undefined, and the right property is used. */
-  width: env(titlebar-area-width);
-  right: var(--padding);
-  /* With WCO, make sure to position where the titlebar would start. */
-  /* And fallback to the padding size without WCO. */
-  left: env(titlebar-area-x, var(--padding));
+
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
 }
 
 .narrow header {
   top: env(titlebar-area-height, 0);
   left: 0;
-  width: calc(100% - var(--padding) * 2);
+  width: 100%;
 }
 
 footer {
@@ -130,8 +127,8 @@ header .new::after {
   background: #f3f3f3;
   padding: var(--padding);
   position: absolute;
-  top: calc(var(--toolbar-height) + var(--padding) * 2);
-  bottom: calc(var(--toolbar-height) + var(--padding) * 2);
+  top: var(--toolbar-height);
+  bottom: var(--toolbar-height);
   left: 0;
   right: 0;
   overflow: auto;
