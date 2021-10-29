@@ -1,0 +1,8 @@
+{
+  "name": "1DIV",
+  "version": "1.0.0",
+  "description": "A simple CSS playground where you style only 1 div",
+  "dependencies": {
+    "monaco-editor": "^0.29.1"
+  }
+}
