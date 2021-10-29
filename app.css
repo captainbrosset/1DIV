@@ -45,7 +45,6 @@ footer {
   left: 0;
   right: 0;
   height: var(--toolbar-height);
-  padding: var(--padding);
 }
 
 header {
@@ -53,8 +52,14 @@ header {
   display: flex;
   gap: var(--padding);
   justify-content: space-between;
-  width: calc(env(titlebar-area-width) - var(--padding) * 2);
-  left: env(titlebar-area-x, 0);
+  padding: var(--padding) 0;
+  /* With WCO, then width wins and our header is exactly the size of the title bar. */
+  /* Without WCO, then width is undefined, and the right property is used. */
+  width: env(titlebar-area-width);
+  right: var(--padding);
+  /* With WCO, make sure to position where the titlebar would start. */
+  /* And fallback to the padding size without WCO. */
+  left: env(titlebar-area-x, var(--padding));
 }
 
 .narrow header {
@@ -65,6 +70,7 @@ header {
 
 footer {
   bottom: 0;
+  padding: var(--padding);
 }
 
 header h1 {
