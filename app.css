@@ -233,7 +233,7 @@ css-playground.selected.full-size {
 
 .code {
   position: absolute;
-  top: calc(var(--toolbar-height) + 2 * var(--padding));
+  top: var(--toolbar-height);
   left: 0;
   bottom: 0;
   width: 40%;
@@ -244,8 +244,9 @@ css-playground.selected.full-size {
   top: 0;
   height: var(--toolbar-height);
   padding: var(--padding);
+  box-sizing: border-box;
   left: 0;
-  width: calc(40% - 2 * var(--padding));
+  width: 40%;
   background: #1e1e1e;
   border-right: .5px solid #1e1e1e;
   display: flex;
