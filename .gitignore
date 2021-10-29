@@ -1,1 +1,4 @@
 node_modules
+*bundle*
+*ttf
+dist/*worker.js

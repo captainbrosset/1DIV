@@ -1,4 +1,6 @@
-class Store {
+const localforage = require('./localforage-1.10.0.min.js');
+
+export class Store {
   constructor() { }
 
   async getAll() {

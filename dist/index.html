@@ -9,16 +9,6 @@
   <meta name="theme-color" content="#ffffff">
   <title>1DIV</title>
   <link rel="stylesheet" href="app.css">
-  <script src="playground.js"></script>
-  <script src="localforage-1.10.0.min.js"></script>
-  <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
-  <script>
-    require.config({
-      paths: {
-        'vs': '/node_modules/monaco-editor/min/vs',
-      }
-    });
-  </script>
 </head>
 
 <body>
@@ -49,8 +39,7 @@
       <li><button title="Show fewer 1DIVs" class='zoom-large'>large</button></li>
     </ul>
   </footer>
-  <script src="store.js"></script>
-  <script src="app.js"></script>
+  <script src="bundle.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js', {

@@ -8,19 +8,19 @@
   "display_override": ["window-controls-overlay"],
   "icons": [
     {
-        "src": "icon-96.png",
+        "src": "img/icon-96.png",
         "sizes": "96x96"
     },
     {
-        "src": "icon-128.png",
+        "src": "img/icon-128.png",
         "sizes": "128x128"
     },
     {
-        "src": "icon-256.png",
+        "src": "img/icon-256.png",
         "sizes": "256x256"
     },
     {
-        "src": "icon-512.png",
+        "src": "img/icon-512.png",
         "sizes": "512x512"
     }
 ]

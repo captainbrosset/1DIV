@@ -1,19 +1,20 @@
+import * as monaco from 'monaco-editor';
+
+require('./playground');
+const { Store } = require('./store');
 
 let editor = null;
 let selectedPlayground = null;
 let currentPlayground = null;
 let currentId = null;
 
-const playgroundEl = document.querySelector('css-playground');
 const colorEl = document.querySelector('input[type="color"]');
 const demosEl = document.querySelector('.demos .grid');
-const saveEl = document.querySelector('.save');
 const newEl = document.querySelector('.new');
 const closeEl = document.querySelector('.close');
 const demoNameEl = document.querySelector('.demo-name');
 const searchFieldEl = document.querySelector('.search-field');
 const delEl = document.querySelector('.delete');
-const headerEl = document.querySelector('header');
 
 const store = new Store();
 
@@ -62,32 +63,30 @@ function themeWindow(bgColor) {
   document.querySelector("meta[name=theme-color]").setAttribute('content', bgColor);
 }
 
-require(['vs/editor/editor.main'], () => {
-  editor = monaco.editor.create(document.querySelector('.code'), {
-    theme: 'vs-dark',
-    model: monaco.editor.createModel(INITIAL_CODE, 'css'),
-    wordWrap: 'off',
-    minimap: {
-      enabled: false
-    },
-    scrollbar: {
-      vertical: 'auto'
-    }
-  });
-
-  editor.getModel().onDidChangeContent(async () => {
-    if (!selectedPlayground || !currentPlayground) {
-      return;
-    }
-    updatePlayground(editor.getValue(), null, selectedPlayground);
-    updatePlayground(editor.getValue(), null, currentPlayground);
-
-    await store.set(currentId, editor.getValue(), colorEl.value);
-  });
-
-  // Re-layout on resize.
-  window.onresize = () => editor.layout();
+editor = monaco.editor.create(document.querySelector('.code'), {
+  theme: 'vs-dark',
+  model: monaco.editor.createModel(INITIAL_CODE, 'css'),
+  wordWrap: 'off',
+  minimap: {
+    enabled: false
+  },
+  scrollbar: {
+    vertical: 'auto'
+  }
 });
+
+editor.getModel().onDidChangeContent(async () => {
+  if (!selectedPlayground || !currentPlayground) {
+    return;
+  }
+  updatePlayground(editor.getValue(), null, selectedPlayground);
+  updatePlayground(editor.getValue(), null, currentPlayground);
+
+  await store.set(currentId, editor.getValue(), colorEl.value);
+});
+
+// Re-layout on resize.
+window.onresize = () => editor.layout();
 
 // Response to color changes.
 colorEl.addEventListener('input', async () => {
@@ -281,7 +280,7 @@ delEl.addEventListener('click', async () => {
 // Don't try to squeeze our own titlebar if the window is too narrow.
 if (navigator.windowControlsOverlay) {
   navigator.windowControlsOverlay.addEventListener('geometrychange', () => {
-    const {width} = navigator.windowControlsOverlay.getBoundingClientRect();
+    const { width } = navigator.windowControlsOverlay.getBoundingClientRect();
 
     // Yes, we could do this with a media-query, but we only care
     // if the window-controls-overlay feature is being used.
