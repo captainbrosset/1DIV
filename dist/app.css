@@ -177,8 +177,8 @@ header .new::after {
 }
 
 .demo h2 {
-  background: var(--theme-color);
-  color: var(--contrast-color);
+  background: inherit;
+  color: var(--theme-color);
   position: absolute;
   bottom: var(--padding);
   width: calc(100% - 2 * var(--padding));
@@ -188,6 +188,7 @@ header .new::after {
   overflow: hidden;
   font-size: 16px;
   white-space: nowrap;
+  opacity: 0;
 }
 
 .demo:hover {
@@ -195,8 +196,7 @@ header .new::after {
 }
 
 .demo:hover h2 {
-  background-color: inherit;
-  color: var(--theme-color);
+  opacity: 1;
 }
 
 css-playground.selected {
@@ -232,10 +232,10 @@ css-playground.selected.full-size {
 
 .code {
   position: absolute;
-  bottom: var(--toolbar-height);
+  bottom: calc(var(--toolbar-height) - 1px);
   left: 0;
   right: 0;
-  height: calc(40% - var(--toolbar-height));
+  height: calc(40% - var(--toolbar-height) + 1px);
 }
 
 .demo-meta-data {
