@@ -4,6 +4,7 @@
   --hover-contrast-color: red;
   --padding: 12px;
   --toolbar-height: calc(40px + 2 * var(--padding));
+  --edited-demo-height: 60%;
 }
 
 html,
@@ -11,6 +12,7 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+  font-family: monospace;
 }
 
 * {
@@ -208,9 +210,9 @@ css-playground.selected {
   transition: all .25s ease-out;
 }
 
-css-playground.selected.full-size {
+css-playground.full-size {
   width: 100% !important;
-  height: 60% !important;
+  height: var(--edited-demo-height) !important;
   left: 0 !important;
   top: 0 !important;
 
@@ -243,7 +245,26 @@ css-playground.selected.full-size {
   bottom: calc(var(--toolbar-height) - 1px);
   left: 0;
   right: 0;
-  height: calc(40% - var(--toolbar-height) + 1px);
+  height: calc((100% - var(--edited-demo-height)) - var(--toolbar-height) + 1px);
+}
+
+.resizer {
+  position: absolute;
+  top: calc(var(--edited-demo-height) - 2px);
+  height: 4px;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  cursor: ns-resize;
+}
+
+.resizer:hover {
+  background: var(--hover-contrast-color);
+}
+
+.demo-selected .resizer {
+  pointer-events: all;
+  z-index: 2;
 }
 
 .demo-meta-data {
@@ -320,7 +341,7 @@ css-playground {
 
 .color-picker {
   right: 20px;
-  bottom: calc(40% + 20px);
+  bottom: calc((100% - var(--edited-demo-height)) + 20px);
   overflow: hidden;
   background-color: transparent;
 }

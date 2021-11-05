@@ -7,6 +7,7 @@ let editor = null;
 let selectedPlayground = null;
 let currentPlayground = null;
 let currentId = null;
+let isResizing = false;
 
 const colorEl = document.querySelector('input[type="color"]');
 const demosEl = document.querySelector('.demos .grid');
@@ -15,6 +16,7 @@ const closeEl = document.querySelector('.close');
 const demoNameEl = document.querySelector('.demo-name');
 const searchFieldEl = document.querySelector('.search-field');
 const delEl = document.querySelector('.delete');
+const resizerEl = document.querySelector('.resizer');
 
 const store = new Store();
 
@@ -188,16 +190,24 @@ async function launchDemo(demoEl) {
   document.body.appendChild(currentPlayground);
   document.body.classList.add('demo-selected');
 
-  setTimeout(() => {
-    const forceReflow = currentPlayground.offsetWidth;
-    currentPlayground.classList.add('full-size');
-  }, 0);
+  // Force a reflow so the selected class is added independently from the full-size class. Not batched by the browser.
+  const forceReflow = currentPlayground.offsetWidth;
+  currentPlayground.classList.add('full-size');
+
+  return new Promise(r => {
+    currentPlayground.addEventListener('transitionend', () => {
+      currentPlayground.classList.remove('selected');
+      r();
+    });
+  });
 }
 
 async function closeDemo() {
   if (!currentPlayground || !selectedPlayground) {
     return;
   }
+
+  currentPlayground.classList.add('selected');
 
   // Update the zoomed-out rect coordinates in case the window was resized.
   const rect = selectedPlayground.getBoundingClientRect();
@@ -287,3 +297,32 @@ if (navigator.windowControlsOverlay) {
     document.body.classList.toggle('narrow', width < 250);
   });
 }
+
+// Resize the editor on resizer drag.
+resizerEl.addEventListener('mousedown', e => {
+  if (isResizing) {
+    return;
+  }
+
+  isResizing = true;
+  document.documentElement.style.userSelect = 'none';
+});
+
+addEventListener('mouseup', e => {
+  if (!isResizing) {
+    return;
+  }
+
+  isResizing = false;
+  document.documentElement.style.userSelect = 'auto';
+});
+
+addEventListener('mousemove', e => {
+  if (!isResizing) {
+    return;
+  }
+
+  const topOffset = e.clientY;
+  document.documentElement.style.setProperty('--edited-demo-height', topOffset + 'px');
+  editor.layout();
+});
