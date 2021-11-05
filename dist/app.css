@@ -1,6 +1,7 @@
 :root {
   --theme-color: #ffffff;
   --contrast-color: #282a39;
+  --hover-contrast-color: red;
   --padding: 12px;
   --toolbar-height: calc(40px + 2 * var(--padding));
 }
@@ -32,7 +33,7 @@ button {
 }
 
 button:hover {
-  background: red;
+  background: var(--hover-contrast-color);
 }
 
 body {
@@ -365,12 +366,12 @@ footer .zoom li {
   height: 1.5rem;
   background-color: var(--contrast-color);
   background-image:
-    linear-gradient(to bottom, white, white 2px, transparent 0),
-    linear-gradient(to right, white, white 2px, transparent 0);
+    linear-gradient(to bottom, var(--theme-color), var(--theme-color) 2px, transparent 0),
+    linear-gradient(to right, var(--theme-color), var(--theme-color) 2px, transparent 0);
 }
 
 .zoom button:hover::before {
-  background-color: red;
+  background-color: var(--hover-contrast-color);
 }
 
 .zoom button.zoom-small::before {
@@ -382,5 +383,5 @@ footer .zoom li {
 }
 
 .zoom button.zoom-large::before {
-  background-size: 0;
+  background-size: 100%;
 }
