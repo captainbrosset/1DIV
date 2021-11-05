@@ -28,7 +28,7 @@ You only have 1 element to style:
 So get creative!
 
 Tips:
-- Use relative units so your demo works at any size.
+- Use em units so your demo works at any size. The 1DIV is set up in a way that 1em is always 1% of the width.
 - Use multiple background-images to draw shapes.
 - Use ::before/::after pseudo-elements.
 - Use multiple box-shadows to duplicate shapes.
@@ -39,15 +39,15 @@ picker button in the bottom-right corner.
 */
 
 .a {
-  width: 90vh;
+  width: 90em;
   aspect-ratio: 1;
   border-radius: 50%;
   background: gold;
   box-shadow:
-    inset 0 0 0 10vh #0001,
-    inset 0 0 0 20vh #0001,
-    inset 0 0 0 30vh #0001,
-    inset 0 0 0 40vh #0001;
+    inset 0 0 0 10em #0001,
+    inset 0 0 0 20em #0001,
+    inset 0 0 0 30em #0001,
+    inset 0 0 0 40em #0001;
 }`;
 
 function updatePlayground(cssText, bgColor, el) {
