@@ -203,7 +203,7 @@ async function launchDemo(demoEl) {
     currentPlayground.addEventListener('transitionend', () => {
       currentPlayground.classList.remove('selected');
       r();
-    });
+    }, {once: true});
   });
 }
 
@@ -236,7 +236,7 @@ async function closeDemo() {
       currentPlayground = null;
 
       r();
-    });
+    }, {once: true});
   });
 }
 
