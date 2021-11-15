@@ -135,6 +135,7 @@ header .new::after {
   left: 0;
   right: 0;
   overflow: auto;
+  z-index: 0;
 }
 
 .narrow .demos {
@@ -215,6 +216,7 @@ css-playground.full-size {
   height: var(--edited-demo-height) !important;
   left: 0 !important;
   top: 0 !important;
+  z-index: 1;
 
   /* When editing a demo, set the font-size to 1vw so that 1em in the demo is 1% of the size. */
   font-size: 1vw;
@@ -229,7 +231,7 @@ css-playground.full-size {
   opacity: 0;
   pointer-events: none;
   transition: opacity .25s linear;
-  z-index: 1;
+  z-index: 2;
 }
 
 .demo-selected .tools > * {
