@@ -1,3 +1,5 @@
+// UPDATED: 2021-11-15
+
 const CACHE_NAME = '1DIV-cache-v1';
 
 const INITIAL_CACHED_RESOURCES = [
