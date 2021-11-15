@@ -12,10 +12,32 @@ class CSSPlayground extends HTMLElement {
 
     this.styleSheet = new CSSStyleSheet();
     shadowRoot.adoptedStyleSheets = [this.styleSheet];
+
+    this.cssText = '';
+    this.bgColor = '';
+  }
+
+  set color(bgColor) {
+    this.bgColor = bgColor;
+    this.refresh();
+  }
+
+  get color() {
+    return this.bgColor;
   }
 
   set css(cssText) {
-    this.styleSheet.replaceSync(cssText);
+    this.cssText = cssText;
+    this.refresh();
+  }
+
+  get css() {
+    return this.cssText;
+  }
+
+  refresh() {
+    const txt = `.a{--bg-color:${this.bgColor};}${this.cssText}`;
+    this.styleSheet.replaceSync(text);
   }
 }
 

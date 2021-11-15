@@ -25,35 +25,40 @@ const INITIAL_CODE = `
 /*
 This is your new 1DIV!
 
-You only have 1 element to style:
-<div class="a"></a>
-So get creative!
-
-Tips:
-- Use em units so your demo works at any size. The 1DIV is set up in a way that 1em is always 1% of the width.
-- Use multiple background-images to draw shapes.
-- Use ::before/::after pseudo-elements.
-- Use multiple box-shadows to duplicate shapes.
+You have a single element to style:
+<div class="a"></div>
+So get creative with CSS!
 
 You can't style the body or html elements. If you
 want to change the background color, use the color
 picker button in the bottom-right corner.
+
+Useful tips:
+- Use % units so your demo works in any container size.
+- The 1DIV is set up in a way where 1em is always 1% of the width.
+- Use multiple background-images to draw shapes.
+- Use ::before/::after pseudo-elements.
+- Use multiple box-shadows to duplicate shapes.
+- The background color you chose is also available with var(--bg-color).
 */
 
 .a {
-  width: 90em;
+  --color: gold;
+  width: 50%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: gold;
+  background: var(--color);
   box-shadow:
-    inset 0 0 0 10em #0001,
-    inset 0 0 0 20em #0001,
-    inset 0 0 0 30em #0001,
-    inset 0 0 0 40em #0001;
+    inset 0 0 0 10em var(--color),
+    inset 0 0 0 20em var(--bg-color),
+    inset 0 0 0 30em var(--color),
+    inset 0 0 0 40em var(--bg-color);
 }`;
 
 function updatePlayground(cssText, bgColor, el) {
+  el.color = bgColor;
   el.css = cssText;
+
   if (bgColor) {
     el.style.backgroundColor = bgColor;
 
