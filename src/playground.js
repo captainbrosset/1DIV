@@ -37,7 +37,7 @@ class CSSPlayground extends HTMLElement {
 
   refresh() {
     const txt = `.a{--bg-color:${this.bgColor};}${this.cssText}`;
-    this.styleSheet.replaceSync(text);
+    this.styleSheet.replaceSync(txt);
   }
 }
 
